@@ -24,8 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
+    //TODO: move to Unit testing class    
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
 }
@@ -53,6 +53,33 @@
         abort();
     }
 }
+
+- (void)insertFoodItemObject:(id)sender
+{
+    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+    NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
+    FoodItem *testFoodItem = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
+    
+    // configure the managed object.
+    
+    // TODO: move to unit testing class
+    testFoodItem.name = @"Test name";
+    testFoodItem.deliciosity = [NSNumber numberWithInt:20];
+    testFoodItem.manufacturer = @"Test manufacturer";
+    testFoodItem.imageURL = @"http://reserve-media.s3.amazonaws.com/test-images/fishsticks.png";
+    testFoodItem.timeAdded = [NSDate date];
+    
+    // Save the context.
+    NSError *error = nil;
+    if (![context save:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+}
+
+
 
 #pragma mark - Segues
 
