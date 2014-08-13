@@ -1,0 +1,5 @@
+platform :ios, '7.0'
+pod 'AFNetworking', '~> 2.2.1'
+pod 'Reachability', '~> 3.0'
+pod 'HJCache', '~> 0.0.1'
+pod 'TMCache', '~> 1.2.0'
