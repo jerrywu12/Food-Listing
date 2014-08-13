@@ -10,6 +10,8 @@
 #import "DetailViewController.h"
 #import "MasterViewController.h"
 
+#import "FoodItem.h"
+
 @interface AppDelegate ()
 
 @end

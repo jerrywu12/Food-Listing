@@ -15,6 +15,7 @@
 		C40E77AE199C1D9F009B45B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C40E77AC199C1D9F009B45B9 /* Main.storyboard */; };
 		C40E77B0199C1D9F009B45B9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C40E77AF199C1D9F009B45B9 /* Images.xcassets */; };
 		C40E77BC199C1D9F009B45B9 /* Food_ListingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C40E77BB199C1D9F009B45B9 /* Food_ListingTests.m */; };
+		C40E77C8199C1F17009B45B9 /* FoodItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C40E77C7199C1F17009B45B9 /* FoodItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,9 @@
 		C40E77B5199C1D9F009B45B9 /* Food ListingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Food ListingTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C40E77BA199C1D9F009B45B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C40E77BB199C1D9F009B45B9 /* Food_ListingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Food_ListingTests.m; sourceTree = "<group>"; };
+		C40E77C5199C1F16009B45B9 /* Food Listing-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Food Listing-Bridging-Header.h"; sourceTree = "<group>"; };
+		C40E77C6199C1F17009B45B9 /* FoodItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FoodItem.h; path = Model/FoodItem.h; sourceTree = "<group>"; };
+		C40E77C7199C1F17009B45B9 /* FoodItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FoodItem.m; path = Model/FoodItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,8 +96,9 @@
 				C40E77AA199C1D9F009B45B9 /* DetailViewController.m */,
 				C40E77AC199C1D9F009B45B9 /* Main.storyboard */,
 				C40E77AF199C1D9F009B45B9 /* Images.xcassets */,
-				C40E77A3199C1D9F009B45B9 /* Food_Listing.xcdatamodeld */,
+				C40E77C9199C1F33009B45B9 /* Model */,
 				C40E779C199C1D9F009B45B9 /* Supporting Files */,
+				C40E77C5199C1F16009B45B9 /* Food Listing-Bridging-Header.h */,
 			);
 			path = "Food Listing";
 			sourceTree = "<group>";
@@ -122,6 +127,16 @@
 				C40E77BA199C1D9F009B45B9 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C40E77C9199C1F33009B45B9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C40E77A3199C1D9F009B45B9 /* Food_Listing.xcdatamodeld */,
+				C40E77C6199C1F17009B45B9 /* FoodItem.h */,
+				C40E77C7199C1F17009B45B9 /* FoodItem.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,6 +240,7 @@
 			files = (
 				C40E77AB199C1D9F009B45B9 /* DetailViewController.m in Sources */,
 				C40E77A8199C1D9F009B45B9 /* MasterViewController.m in Sources */,
+				C40E77C8199C1F17009B45B9 /* FoodItem.m in Sources */,
 				C40E77A5199C1D9F009B45B9 /* Food_Listing.xcdatamodeld in Sources */,
 				C40E77A2199C1D9F009B45B9 /* AppDelegate.m in Sources */,
 				C40E779F199C1D9F009B45B9 /* main.m in Sources */,
@@ -342,9 +358,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Food Listing/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Food Listing/Food Listing-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -353,9 +373,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Food Listing/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Food Listing/Food Listing-Bridging-Header.h";
 			};
 			name = Release;
 		};
