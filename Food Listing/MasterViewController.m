@@ -131,7 +131,18 @@
     }
 }
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    FoodItem *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    FoodTableViewCell *foodCell = (FoodTableViewCell *)cell;
+    
+    foodCell.foodNameLabel.text = object.name;
+    
+    // load food image
+    NSURL *avatarUrl = [NSURL URLWithString:object.imageURL];
+    foodCell.foodImageView.url = avatarUrl;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate.objMan manage:foodCell.foodImageView];
 }
 
 // customized tableViewCell disable the method of prepareForSegue: sender:
@@ -230,8 +241,21 @@
     [self.tableView endUpdates];
 }
 
+
 #pragma mark - convenient methods
 
-- (IBAction)randomSelection:(UIButton *)sender {
+- (IBAction)randomSelection:(UIButton *)sender
+{
+    // Generate a random number
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][0];
+    long max = [sectionInfo numberOfObjects] - 1;
+    long randNum = rand() % max;
+
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:randNum inSection:0];
+    [self.tableView scrollToRowAtIndexPath:indexPath
+                          atScrollPosition:UITableViewScrollPositionMiddle
+                                  animated:YES];
 }
+
+
 @end
