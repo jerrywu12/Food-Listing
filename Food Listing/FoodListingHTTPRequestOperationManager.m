@@ -39,38 +39,17 @@
 
 #pragma mark - Operations
 
-- (void)getFoodList
+- (void)getFoodListJSONData
 {
     NSString *fullURLString = [serverFoodListURLString stringByAppendingString:@"test-data.json"];
     
     [self GET:fullURLString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //        NSLog(@"%@", responseObject);
-        
-        [FoodJSONParser getFoodItemList:responseObject];
-        
+        if ([self.delegate respondsToSelector:@selector(foodListingHTTPRequestOperationManager:didUpdateWithFoodList:)]) {
+            [self.delegate foodListingHTTPRequestOperationManager:self didUpdateWithFoodList:responseObject];
+        }
     } failure:nil];
 }
 
-
-- (AFHTTPRequestOperation *)operationGetFoodList
-{
-    NSString *fullURLString = [serverFoodListURLString stringByAppendingString:@"test-data.json"];
-    
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:fullURLString]];
-    
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"Food JSON: %@", (NSString *)responseObject);
-        if ([self.delegate respondsToSelector:@selector(foodListingHTTPClient:didUpdateWithFoodList:)]) {
-            [self.delegate foodListingHTTPClient:self didUpdateWithFoodList:responseObject];
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if ([self.delegate respondsToSelector:@selector(foodListingHTTPClient:didFailWithError:)]) {
-            [self.delegate foodListingHTTPClient:self didFailWithError:error];
-        }
-    }];
-    
-    return operation;
-}
 
 @end

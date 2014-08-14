@@ -23,13 +23,12 @@ static NSString * const serverFoodListURLString = @"http://reserve-media.s3.amaz
 - (instancetype)initWithBaseURL:(NSURL *)url;
 
 // Operations
-- (AFHTTPRequestOperation *)operationGetFoodList;
-- (void)getFoodList;
+- (void)getFoodListJSONData;
 
 @end
 
 @protocol FoodListingHTTPRequestOperationManagerDelegate <NSObject>
 @optional
--(void)foodListingHTTPClient:(FoodListingHTTPRequestOperationManager *)client didUpdateWithFoodList:(id)foodList;
--(void)foodListingHTTPClient:(FoodListingHTTPRequestOperationManager *)client didFailWithError:(NSError *)error;
+-(void)foodListingHTTPRequestOperationManager:(FoodListingHTTPRequestOperationManager *)manager didUpdateWithFoodList:(id)foodList;
+-(void)foodListingHTTPRequestOperationManager:(FoodListingHTTPRequestOperationManager *)manager didFailWithError:(NSError *)error;
 @end

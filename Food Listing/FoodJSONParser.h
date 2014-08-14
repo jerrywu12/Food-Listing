@@ -12,6 +12,6 @@
 
 @interface FoodJSONParser : NSObject
 
-+ (void)getFoodItemList:(id)foodListJSON;
++ (NSArray *)getFoodItemList:(id)data withMOC:(NSManagedObjectContext *)moc;
 
 @end

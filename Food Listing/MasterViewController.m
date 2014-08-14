@@ -10,6 +10,7 @@
 #import "DetailViewController.h"
 
 #import "FoodItem.h"
+#import "FoodJSONParser.h"
 
 @interface MasterViewController ()
 
@@ -25,11 +26,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(refreshData:)
+//                                                 name:NSManagedObjectContextDidSaveNotification
+//                                               object:nil];
     [self getFoodList];
 
     //TODO: move to Unit testing class
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
+//    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+//    self.navigationItem.rightBarButtonItem = addButton;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -88,21 +93,31 @@
     FoodListingHTTPRequestOperationManager *operationManager = [FoodListingHTTPRequestOperationManager sharedFoodListHTTPRequestOperationManager];
     operationManager.delegate = self;
 
-    [operationManager getFoodList];
+    [operationManager getFoodListJSONData];
 }
 
 #pragma mark - FoodListingHTTPClientDelegate
 
-- (void)foodListingHTTPClient:(FoodListingHTTPRequestOperationManager *)client didUpdateWithFoodList:(id)foodList
+- (void)foodListingHTTPRequestOperationManager:(FoodListingHTTPRequestOperationManager *)manager didUpdateWithFoodList:(id)foodListData
 {
-    NSLog(@"Food list from server %@", foodList);
+//    NSLog(@"Food list from server: %@", foodListData);
+    NSArray *foodItemList = [FoodJSONParser getFoodItemList:foodListData withMOC:_managedObjectContext];
 }
 
-- (void)foodListingHTTPClient:(FoodListingHTTPRequestOperationManager *)client didFailWithError:(NSError *)error
+- (void)refreshData:(id)sender
 {
-    
+    [self fetchData];
+    [self.tableView reloadData];
 }
 
+- (void)fetchData
+{
+    NSError *error;
+    BOOL success = [self.fetchedResultsController performFetch:&error];
+    if (!success || error) {
+        NSLog(@"Error fetching results %@", [error localizedDescription]);
+    }
+}
 
 #pragma mark - Segues
 
@@ -242,7 +257,7 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [self.tableView endUpdates];
+    [self.tableView reloadData];
 }
 
 /*
