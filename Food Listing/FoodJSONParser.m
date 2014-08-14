@@ -38,7 +38,7 @@
     foodItem.name = name;
     
     NSNumber *deliciosity = foodItemDetails[@"deliciosity"];
-    NSLog(@"deliciosity: %@", deliciosity);
+    NSLog(@"deliciosity: %@", [deliciosity stringValue]);
     foodItem.deliciosity = deliciosity;
 
     NSString *imageURLString = (NSString *)foodItemDetails[@"image"];

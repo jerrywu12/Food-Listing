@@ -8,6 +8,6 @@
         <attribute name="timeAdded" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <elements>
-        <element name="FoodItem" positionX="261" positionY="198" width="128" height="118"/>
+        <element name="FoodItem" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

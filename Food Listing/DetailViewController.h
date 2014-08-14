@@ -8,10 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+#import "FoodItem.h"
+
 @interface DetailViewController : UIViewController
 
-@property (strong, nonatomic) id detailItem;
-@property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+@property (strong, nonatomic) FoodItem *detailItem;
+
+@property (weak, nonatomic) IBOutlet UILabel *timeAddedLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *deliciosityLabel;
+@property (weak, nonatomic) IBOutlet UILabel *manufacturerLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *foodImageView;
+
+
 
 @end
 
