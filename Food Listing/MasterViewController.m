@@ -24,6 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    [self getFoodList];
 
     //TODO: move to Unit testing class
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
@@ -79,6 +81,27 @@
     }
 }
 
+#pragma mark - Get Food List from server
+
+- (void)getFoodList
+{
+    FoodListingHTTPRequestOperationManager *operationManager = [FoodListingHTTPRequestOperationManager sharedFoodListHTTPRequestOperationManager];
+    operationManager.delegate = self;
+
+    [operationManager getFoodList];
+}
+
+#pragma mark - FoodListingHTTPClientDelegate
+
+- (void)foodListingHTTPClient:(FoodListingHTTPRequestOperationManager *)client didUpdateWithFoodList:(id)foodList
+{
+    NSLog(@"Food list from server %@", foodList);
+}
+
+- (void)foodListingHTTPClient:(FoodListingHTTPRequestOperationManager *)client didFailWithError:(NSError *)error
+{
+    
+}
 
 
 #pragma mark - Segues
