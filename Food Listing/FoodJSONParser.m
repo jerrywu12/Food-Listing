@@ -30,31 +30,63 @@
 
 + (FoodItem *)getFoodItemDetail:(id)foodItemDetails withMOC:(NSManagedObjectContext *)moc
 {
-    FoodItem *foodItem = [NSEntityDescription insertNewObjectForEntityForName:@"FoodItem"
-                                                       inManagedObjectContext:moc];
+    FoodItem *foodItem = [self fetchOrInsertWithFoodItem:foodItemDetails context:moc error:nil];
     
     NSString *name = (NSString *)foodItemDetails[@"name"];
-    NSLog(@"name: %@", name);
+//    NSLog(@"name: %@", name);
     foodItem.name = name;
     
     NSNumber *deliciosity = foodItemDetails[@"deliciosity"];
-    NSLog(@"deliciosity: %@", [deliciosity stringValue]);
+//    NSLog(@"deliciosity: %@", [deliciosity stringValue]);
     foodItem.deliciosity = deliciosity;
 
     NSString *imageURLString = (NSString *)foodItemDetails[@"image"];
-    NSLog(@"image: %@", imageURLString);
+//    NSLog(@"image: %@", imageURLString);
     foodItem.imageURL = imageURLString;
 
     NSString *manufacturer = (NSString *)foodItemDetails[@"manufacturer"];
-    NSLog(@"manufacturer: %@", manufacturer);
+//    NSLog(@"manufacturer: %@", manufacturer);
     foodItem.manufacturer = manufacturer;
 
     NSDate *date = [self convertJSONDateToNSDate:(NSString *)foodItemDetails[@"added"]];
     foodItem.timeAdded = date;
-    NSLog(@"time: %@", [self formatDate:date]);
+//    NSLog(@"time: %@", [self formatDate:date]);
+    
+    [moc save:nil];
     
     return foodItem;
 }
+
++ (FoodItem *)fetchOrInsertWithFoodItem:(id)foodItemDetails context:(NSManagedObjectContext *)context error:(NSError **)error
+{
+    FoodItem *foodItem = [self fetchFoodItem:foodItemDetails context:context error:error];
+    
+    if (nil == foodItem) {
+        foodItem = [NSEntityDescription insertNewObjectForEntityForName:@"FoodItem"
+                                                 inManagedObjectContext:context];
+        
+        [context save:nil];
+    }
+    
+    return foodItem;
+}
+
++ (FoodItem *)fetchFoodItem:(id)foodItemDetails context:(NSManagedObjectContext *)context error:(NSError **)error
+{
+    NSString *foodName = (NSString *)foodItemDetails[@"name"];
+
+    FoodItem *foodItem;
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"FoodItem"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"name == %@", foodName];
+    [request setPredicate:predicate];
+    NSArray *results = [context executeFetchRequest:request error:error];
+    foodItem = results.firstObject;
+    
+    return foodItem;
+}
+
+
+#pragma mark - Convenient Methods
 
 + (NSDate *)convertJSONDateToNSDate:(NSString *)dateString
 {
@@ -72,6 +104,5 @@
     
     return formatedDateString;
 }
-
 
 @end

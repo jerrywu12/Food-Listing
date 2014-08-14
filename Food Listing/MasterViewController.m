@@ -270,4 +270,16 @@
 }
  */
 
+#pragma mark - convenient methods
+
++ (NSString *)formatDate:(NSDate *)date
+{
+    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+    [formatter setLocale:[NSLocale currentLocale]];
+    [formatter setDateFormat:@"HH:mm a, MMMM dd, yyyy"];
+    NSString *formatedDateString = [formatter stringFromDate:date];
+    
+    return formatedDateString;
+}
+
 @end
