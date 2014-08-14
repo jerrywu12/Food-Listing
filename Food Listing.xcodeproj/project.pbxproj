@@ -19,7 +19,8 @@
 		C40E77C8199C1F17009B45B9 /* FoodItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C40E77C7199C1F17009B45B9 /* FoodItem.m */; };
 		C40E77CC199C3477009B45B9 /* FoodListingHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C40E77CB199C3477009B45B9 /* FoodListingHTTPRequestOperationManager.m */; };
 		C40E77CF199C5A88009B45B9 /* FoodJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = C40E77CE199C5A88009B45B9 /* FoodJSONParser.m */; };
-		C40E77D1199C77AB009B45B9 /* FoodTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C40E77D0199C77AB009B45B9 /* FoodTableViewCell.xib */; };
+		C40E77D6199C93FF009B45B9 /* FoodTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C40E77D4199C93FF009B45B9 /* FoodTableViewCell.m */; };
+		C40E77D7199C93FF009B45B9 /* FoodTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C40E77D5199C93FF009B45B9 /* FoodTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +57,9 @@
 		C40E77CB199C3477009B45B9 /* FoodListingHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodListingHTTPRequestOperationManager.m; sourceTree = "<group>"; };
 		C40E77CD199C5A88009B45B9 /* FoodJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodJSONParser.h; sourceTree = "<group>"; };
 		C40E77CE199C5A88009B45B9 /* FoodJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodJSONParser.m; sourceTree = "<group>"; };
-		C40E77D0199C77AB009B45B9 /* FoodTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FoodTableViewCell.xib; path = Views/FoodTableViewCell.xib; sourceTree = "<group>"; };
+		C40E77D3199C93FF009B45B9 /* FoodTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodTableViewCell.h; sourceTree = "<group>"; };
+		C40E77D4199C93FF009B45B9 /* FoodTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodTableViewCell.m; sourceTree = "<group>"; };
+		C40E77D5199C93FF009B45B9 /* FoodTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FoodTableViewCell.xib; sourceTree = "<group>"; };
 		CE7F6BA592214403A03FC77C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -169,7 +172,9 @@
 		C40E77D2199C77B1009B45B9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C40E77D0199C77AB009B45B9 /* FoodTableViewCell.xib */,
+				C40E77D3199C93FF009B45B9 /* FoodTableViewCell.h */,
+				C40E77D4199C93FF009B45B9 /* FoodTableViewCell.m */,
+				C40E77D5199C93FF009B45B9 /* FoodTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -258,7 +263,7 @@
 			files = (
 				C40E77AE199C1D9F009B45B9 /* Main.storyboard in Resources */,
 				C40E77B0199C1D9F009B45B9 /* Images.xcassets in Resources */,
-				C40E77D1199C77AB009B45B9 /* FoodTableViewCell.xib in Resources */,
+				C40E77D7199C93FF009B45B9 /* FoodTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +314,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C40E77D6199C93FF009B45B9 /* FoodTableViewCell.m in Sources */,
 				C40E77AB199C1D9F009B45B9 /* DetailViewController.m in Sources */,
 				C40E77A8199C1D9F009B45B9 /* MasterViewController.m in Sources */,
 				C40E77CF199C5A88009B45B9 /* FoodJSONParser.m in Sources */,

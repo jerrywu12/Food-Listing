@@ -21,7 +21,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *manufacturerLabel;
 @property (weak, nonatomic) IBOutlet HJManagedImageV *foodImageView;
 
-
-
 @end
 

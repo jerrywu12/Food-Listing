@@ -26,15 +26,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(refreshData:)
-//                                                 name:NSManagedObjectContextDidSaveNotification
-//                                               object:nil];
+    [self registerTableCell];
+    
     [self getFoodList];
-
-    //TODO: move to Unit testing class
-//    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-//    self.navigationItem.rightBarButtonItem = addButton;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,48 +36,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)insertNewObject:(id)sender {
-    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-    NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
-    NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-        
-    // If appropriate, configure the new managed object.
-    // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-    [newManagedObject setValue:[NSDate date] forKey:@"timeAdded"];
-        
-    // Save the context.
-    NSError *error = nil;
-    if (![context save:&error]) {
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-}
 
-- (void)insertFoodItemObject:(id)sender
+#pragma mark - setups
+
+- (void)registerTableCell
 {
-    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-    NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
-    FoodItem *testFoodItem = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-    
-    // configure the managed object.
-    
-    // TODO: move to unit testing class
-    testFoodItem.name = @"Test name";
-    testFoodItem.deliciosity = [NSNumber numberWithInt:20];
-    testFoodItem.manufacturer = @"Test manufacturer";
-    testFoodItem.imageURL = @"http://reserve-media.s3.amazonaws.com/test-images/fishsticks.png";
-    testFoodItem.timeAdded = [NSDate date];
-    
-    // Save the context.
-    NSError *error = nil;
-    if (![context save:&error]) {
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
+    UINib *foodTableViewCellNIB = [UINib nibWithNibName:NSStringFromClass([FoodTableViewCell class]) bundle:[NSBundle mainBundle]];
+    [self.tableView registerNib:foodTableViewCellNIB forCellReuseIdentifier:NSStringFromClass([FoodTableViewCell class])];
 }
 
 #pragma mark - Get Food List from server
@@ -100,8 +59,7 @@
 
 - (void)foodListingHTTPRequestOperationManager:(FoodListingHTTPRequestOperationManager *)manager didUpdateWithFoodList:(id)foodListData
 {
-//    NSLog(@"Food list from server: %@", foodListData);
-    NSArray *foodItemList = [FoodJSONParser getFoodItemList:foodListData withMOC:_managedObjectContext];
+    [FoodJSONParser getFoodItemList:foodListData withMOC:_managedObjectContext];
 }
 
 - (void)refreshData:(id)sender
@@ -141,7 +99,14 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    FoodTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([FoodTableViewCell class]) forIndexPath:indexPath];
+
+    if (cell == nil)
+    {
+        cell = [[FoodTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([FoodTableViewCell class])];
+    }
+    
+    [cell setDetailItem:[self.fetchedResultsController objectAtIndexPath:indexPath]];
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
@@ -161,15 +126,31 @@
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
+//            abort();
         }
     }
 }
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [[object valueForKey:@"timeAdded"] description];
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    FoodItem *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    FoodTableViewCell *foodCell = (FoodTableViewCell *)cell;
+    
+    foodCell.timeAddedLabel.text = [MasterViewController formatDate:object.timeAdded];
+    
+    // load food image
+    NSURL *avatarUrl = [NSURL URLWithString:object.imageURL];
+    foodCell.foodImageView.url = avatarUrl;
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate.objMan manage:foodCell.foodImageView];
 }
+
+// customized tableViewCell disable the method of prepareForSegue: sender:
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"showDetail" sender:nil];
+}
+
 
 #pragma mark - Fetched results controller
 
@@ -204,7 +185,7 @@
 	     // Replace this implementation with code to handle the error appropriately.
 	     // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
 	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-	    abort();
+//	    abort();
 	}
     
     return _fetchedResultsController;
@@ -257,18 +238,8 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [self.tableView reloadData];
+    [self.tableView endUpdates];
 }
-
-/*
-// Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed. 
- 
- - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    // In the simplest, most efficient, case, reload the table view.
-    [self.tableView reloadData];
-}
- */
 
 #pragma mark - convenient methods
 

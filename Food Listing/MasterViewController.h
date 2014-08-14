@@ -10,12 +10,12 @@
 #import <CoreData/CoreData.h>
 
 #import "FoodListingHTTPRequestOperationManager.h"
+#import "FoodTableViewCell.h"
 
 @interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, FoodListingHTTPRequestOperationManagerDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-
 
 @end
 

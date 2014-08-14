@@ -22,9 +22,7 @@
     }
     
     [moc save:nil];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:NSManagedObjectContextDidSaveNotification object:nil];
-    
+        
     return [foodItemList copy];
 }
 
