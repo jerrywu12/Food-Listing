@@ -18,7 +18,7 @@
 @property (strong, nonatomic) FoodItem *detailItem;
 
 @property (weak, nonatomic) IBOutlet HJManagedImageV *foodImageView;
-@property (weak, nonatomic) IBOutlet UILabel *timeAddedLabel;
+@property (weak, nonatomic) IBOutlet UILabel *foodNameLabel;
 
 - (void)setDetailItem:(FoodItem *)newDetailItem;
 

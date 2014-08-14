@@ -28,8 +28,7 @@
     // Update the user interface for the detail item.
     if (self.detailItem)
     {
-        NSString *formatedDateString = [FoodTableViewCell formatDate:self.detailItem.timeAdded];
-        self.timeAddedLabel.text = formatedDateString;
+        self.foodNameLabel.text = self.detailItem.name;
         
         // load food image
         NSURL *avatarUrl = [NSURL URLWithString:self.detailItem.imageURL];
@@ -37,18 +36,6 @@
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         [appDelegate.objMan manage:self.foodImageView];
     }
-}
-
-#pragma mark - convenient methods
-
-+ (NSString *)formatDate:(NSDate *)date
-{
-    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
-    [formatter setLocale:[NSLocale currentLocale]];
-    [formatter setDateFormat:@"HH:mm a, MMMM dd, yyyy"];
-    NSString *formatedDateString = [formatter stringFromDate:date];
-    
-    return formatedDateString;
 }
 
 @end

@@ -19,12 +19,12 @@
                         <rect key="frame" x="10" y="10" width="167" height="120"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="94" translatesAutoresizingMaskIntoConstraints="NO" id="XPU-at-zL7">
-                        <rect key="frame" x="185" y="64" width="94" height="12"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="94" translatesAutoresizingMaskIntoConstraints="NO" id="XPU-at-zL7">
+                        <rect key="frame" x="185" y="63" width="94" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="94" id="QqW-bn-NYP"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -40,7 +40,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="foodImageView" destination="HPQ-RA-fZw" id="bYV-tV-W07"/>
-                <outlet property="timeAddedLabel" destination="XPU-at-zL7" id="Bxk-gY-tr3"/>
+                <outlet property="foodNameLabel" destination="XPU-at-zL7" id="bzs-1V-KQR"/>
             </connections>
             <point key="canvasLocation" x="249" y="419.5"/>
         </tableViewCell>

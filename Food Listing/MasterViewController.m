@@ -131,18 +131,7 @@
     }
 }
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
-{
-    FoodItem *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    FoodTableViewCell *foodCell = (FoodTableViewCell *)cell;
-    
-    foodCell.timeAddedLabel.text = [MasterViewController formatDate:object.timeAdded];
-    
-    // load food image
-    NSURL *avatarUrl = [NSURL URLWithString:object.imageURL];
-    foodCell.foodImageView.url = avatarUrl;
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate.objMan manage:foodCell.foodImageView];
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
 }
 
 // customized tableViewCell disable the method of prepareForSegue: sender:
@@ -169,7 +158,7 @@
     [fetchRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeAdded" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeAdded" ascending:YES];
     NSArray *sortDescriptors = @[sortDescriptor];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
@@ -243,14 +232,6 @@
 
 #pragma mark - convenient methods
 
-+ (NSString *)formatDate:(NSDate *)date
-{
-    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
-    [formatter setLocale:[NSLocale currentLocale]];
-    [formatter setDateFormat:@"HH:mm a, MMMM dd, yyyy"];
-    NSString *formatedDateString = [formatter stringFromDate:date];
-    
-    return formatedDateString;
+- (IBAction)randomSelection:(UIButton *)sender {
 }
-
 @end
