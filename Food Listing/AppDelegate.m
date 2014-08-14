@@ -24,6 +24,10 @@
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
     MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
     controller.managedObjectContext = self.managedObjectContext;
+    
+    // Image Cache
+    [self setupImgObjManager];
+    
     return YES;
 }
 
@@ -129,6 +133,20 @@
             abort();
         }
     }
+}
+
+
+#pragma mark - HJCacheClasses
+
+- (void)setupImgObjManager
+{
+    _objMan = [[HJObjManager alloc] init];
+    //if you are using for full screen images, you'll need a smaller memory cache:
+    //objMan = [[HJObjManager alloc] initWithLoadingBufferSize:2 memCacheSize:2]];
+    
+    NSString *cacheDirectory = [NSHomeDirectory() stringByAppendingString:@"/Library/Caches/ImageCache"];
+    HJMOFileCache *fileCache = [[HJMOFileCache alloc] initWithRootPath:cacheDirectory];
+    _objMan.fileCache = fileCache;
 }
 
 @end

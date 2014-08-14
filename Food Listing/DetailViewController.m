@@ -8,6 +8,9 @@
 
 #import "DetailViewController.h"
 
+#import "AppDelegate.h"
+
+
 @interface DetailViewController ()
 
 @end
@@ -35,6 +38,12 @@
         self.nameLabel.text = self.detailItem.name;
         self.deliciosityLabel.text = [self.detailItem.deliciosity stringValue];
         self.manufacturerLabel.text = self.detailItem.manufacturer;
+        
+        // load food image
+        NSURL *avatarUrl = [NSURL URLWithString:self.detailItem.imageURL];
+        self.foodImageView.url = avatarUrl;
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        [appDelegate.objMan manage:self.foodImageView];
     }
 }
 

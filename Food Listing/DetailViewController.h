@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "FoodItem.h"
+#import "HJManagedImageV.h"
 
 @interface DetailViewController : UIViewController
 
@@ -18,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *deliciosityLabel;
 @property (weak, nonatomic) IBOutlet UILabel *manufacturerLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *foodImageView;
+@property (weak, nonatomic) IBOutlet HJManagedImageV *foodImageView;
 
 
 

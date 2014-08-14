@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
+#import "HJObjManager.h"
+#import "HJMOFileCache.h"
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
@@ -19,6 +22,10 @@
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
+
+// Image Cache Library
+- (void)setupImgObjManager;
+@property (strong, nonatomic) HJObjManager *objMan;
 
 
 @end

@@ -28,6 +28,8 @@
     return [foodItemList copy];
 }
 
+#pragma mark - Insert object/entity to Core Data
+
 + (FoodItem *)getFoodItemDetail:(id)foodItemDetails withMOC:(NSManagedObjectContext *)moc
 {
     FoodItem *foodItem = [self fetchOrInsertWithFoodItem:foodItemDetails context:moc error:nil];
@@ -64,8 +66,6 @@
     if (nil == foodItem) {
         foodItem = [NSEntityDescription insertNewObjectForEntityForName:@"FoodItem"
                                                  inManagedObjectContext:context];
-        
-        [context save:nil];
     }
     
     return foodItem;
