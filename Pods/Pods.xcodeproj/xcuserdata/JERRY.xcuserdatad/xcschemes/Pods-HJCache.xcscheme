@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4EF8D88FB4BB49438E8823B6"
+               BlueprintIdentifier = "77EA99D7EDB44756871E588D"
                BuildableName = "libPods-HJCache.a"
                BlueprintName = "Pods-HJCache"
                ReferencedContainer = "container:Pods.xcodeproj">

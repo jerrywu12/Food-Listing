@@ -20,18 +20,27 @@ PODS:
     - AFNetworking/NSURLSession
   - HJCache (0.0.1)
   - Reachability (3.1.1)
+  - ReactiveCocoa (2.3.1):
+    - ReactiveCocoa/UI
+  - ReactiveCocoa/Core (2.3.1):
+    - ReactiveCocoa/no-arc
+  - ReactiveCocoa/no-arc (2.3.1)
+  - ReactiveCocoa/UI (2.3.1):
+    - ReactiveCocoa/Core
   - TMCache (1.2.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.2.1)
   - HJCache (~> 0.0.1)
   - Reachability (~> 3.0)
+  - ReactiveCocoa (~> 2.3)
   - TMCache (~> 1.2.0)
 
 SPEC CHECKSUMS:
   AFNetworking: ab63e259fe91eef4519b371ef0a4955af0e73e64
   HJCache: a336f47aadd41ca6855aba3bd7256b0a9b5c9f10
   Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
+  ReactiveCocoa: dca75777b9d18990c8714a3a6f2149f29b4d1462
   TMCache: ed936c5b4684e4ea15113d46fba8829ed3baadad
 
 COCOAPODS: 0.33.1
